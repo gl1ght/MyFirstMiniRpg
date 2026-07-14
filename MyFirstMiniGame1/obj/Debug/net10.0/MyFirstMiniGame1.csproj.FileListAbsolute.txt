@@ -1,0 +1,14 @@
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\bin\Debug\net10.0\MyFirstMiniGame1.exe
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\bin\Debug\net10.0\MyFirstMiniGame1.deps.json
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\bin\Debug\net10.0\MyFirstMiniGame1.runtimeconfig.json
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\bin\Debug\net10.0\MyFirstMiniGame1.dll
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\bin\Debug\net10.0\MyFirstMiniGame1.pdb
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.AssemblyInfoInputs.cache
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.AssemblyInfo.cs
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.csproj.CoreCompileInputs.cache
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.dll
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\refint\MyFirstMiniGame1.dll
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.pdb
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\MyFirstMiniGame1.genruntimeconfig.cache
+C:\Users\Nikita\Desktop\Code\CsharpProjects\MyFirstMiniGame1\obj\Debug\net10.0\ref\MyFirstMiniGame1.dll
