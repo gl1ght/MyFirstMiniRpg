@@ -62,7 +62,7 @@ class Game
                         break; 
                     case ConsoleKey.D7:
                     case ConsoleKey.NumPad7:
-                        player = SaveManager.Load(data, player);
+                        player = SaveManager.NewLoad(data, player);
                         nextDay = false;
                         break; 
                     case ConsoleKey.Escape:

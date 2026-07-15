@@ -51,7 +51,7 @@ class Menu
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    player = SaveManager.Load(data, player);
+                    player = SaveManager.NewLoad(data, player);
                     gameNotReady = false;
                     break;
   
@@ -80,7 +80,7 @@ class Menu
         {
             case ConsoleKey.D1:
             case ConsoleKey.NumPad1:
-                SaveManager.Save(player);
+                SaveManager.NewSave(player);
                 break;
             case ConsoleKey.D2:
             case ConsoleKey.NumPad2:

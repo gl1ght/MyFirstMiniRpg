@@ -1,3 +1,4 @@
+using System.Xml.Linq;
 
 class Inventory
 {
@@ -148,7 +149,21 @@ class Inventory
     return slots[index];
     }
 
+public void LoadFromXml(XElement inventoryElement)
+{
+    slots.Clear();
 
+    foreach (XElement itemElement in inventoryElement.Elements("Item"))
+    {
+        string itemName = (string)itemElement.Element("Name");
+
+        int count = (int)itemElement.Element("Count");
+
+        LootableItems item = ItemFabric.Create(itemName);
+
+        AddItem(item, count);
+    }
+}
 
     public void SaveInventory(StreamWriter writer)
 {
@@ -173,5 +188,22 @@ class Inventory
 
         AddItem(item, amount);
     }
+}
+
+    public XElement ToXml()
+{
+    XElement inventory = new XElement("Inventory");
+
+    foreach (InventorySlot slot in slots)
+    {
+        inventory.Add(
+            new XElement("Item",
+                new XElement("Name", slot.Item.Name),
+                new XElement("Count", slot.Count)
+            )
+        );
+    }
+
+    return inventory;
 }
 }

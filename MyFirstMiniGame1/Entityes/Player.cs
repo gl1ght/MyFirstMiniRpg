@@ -1,6 +1,7 @@
 
 using System.Data;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 
 class Player : Entity
 {
@@ -172,7 +173,28 @@ public void GoToSleep(Random dice)
                     }
     }
 
-    
+    public static Player LoadFromXml(XElement element)
+{
+    SaveData data = new SaveData();
+
+    data.level = (int)element.Element("level");
+    data.exp = (int)element.Element("exp");
+    data.Health = (int)element.Element("health");
+    data.Hunger = (int)element.Element("hunger");
+    data.money = (int)element.Element("money");
+    data.statDayAlive = (int)element.Element("statDayAlive");
+    data.statDayEat = (int)element.Element("statDayEat");
+    data.statDayWork = (int)element.Element("statDayWork");
+    data.statDaySleep = (int)element.Element("statDaySleep");
+
+    Player player = new Player(data);
+
+    XElement inventoryElement = element.Element("Inventory");
+
+    player.Inventory.LoadFromXml(inventoryElement);
+
+    return player;
+}
 
 public void NewDay()
     {
