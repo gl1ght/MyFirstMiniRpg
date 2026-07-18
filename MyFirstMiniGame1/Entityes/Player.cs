@@ -26,7 +26,7 @@ class Player : Entity
                 }}
 
 
-    public Player(SaveData data) : base(data.level,100, 20, "Игрок")
+    public Player(SaveData data) : base(data.level,100, 20, "Герой")
     {
         
         level = data.level;
@@ -64,33 +64,23 @@ public static Player CreateNew()
         return new Player(data);
     }
 
-public void SearchFood(Random dice, Player player)
+// Ищет еду. Если возвращает не null — на игрока напал враг (бой обрабатывает UI).
+public Enemy? SearchFood(Random dice)
         {
-                    
                     statDayEat++;
-                    System.Console.WriteLine("Чтобы искать еду нажми любую клавишу");
-                    Console.ReadKey(true);
                     int gamble = dice.Next(1, 11);
                     if(gamble == 1 || gamble == 2)
                     {
-                        System.Console.WriteLine("Ты ничего не нашел");
-                        
+                        GameLog.Add("Ти нічого не знайшов");
                     }
                     else if(gamble == 3 || gamble == 4)
                     {
                         gamble = dice.Next(1, 6);
+                        Hung(-10);
                         if(gamble <= 4)
-                        {
-                        Wolf wolf = new Wolf();
-                        SearchFoodFight(dice,player,wolf);
-                        player.Inventory.AddItem(new WolfMeat(), 2);
-                        }
-                        else if(gamble == 5)
-                        {
-                        Bear bear = new Bear();
-                        SearchFoodFight(dice,player,bear);
-                        player.Inventory.AddItem(new BearMeat(), 2);
-                        }
+                            return new Wolf();
+                        else
+                            return new Bear();
                     }
                     else
                     {
@@ -99,75 +89,61 @@ public void SearchFood(Random dice, Player player)
                         {
                           case 1:
                           gamble = dice.Next(3, 7);
-                          player.Inventory.AddItem(new Mushroom(), gamble);
-                          System.Console.WriteLine($"Ты нашел грибы {gamble}");
+                          Inventory.AddItem(new Mushroom(), gamble);
+                          GameLog.Add($"Ти знайшов гриби x{gamble}");
                           break;  
                           case 2:
                           gamble = dice.Next(3, 7);
-                          player.Inventory.AddItem(new Berry(), gamble);
-                          System.Console.WriteLine($"Ты нашел ягоды {gamble}");
+                          Inventory.AddItem(new Berry(), gamble);
+                          GameLog.Add($"Ти знайшов ягоди x{gamble}");
                           break;  
                           case 3:
                           gamble = dice.Next(3, 7);
-                          player.Inventory.AddItem(new Apple(), gamble);
-                          System.Console.WriteLine($"Ты нашел яблоки {gamble}");
+                          Inventory.AddItem(new Apple(), gamble);
+                          GameLog.Add($"Ти знайшов яблука x{gamble}");
                           break;  
                         }
-
-
-                        
-                        
                     }
-                    player.Hung(-10);
+                    Hung(-10);
+                    return null;
         }
 
  public void GoForWork(Random dice)
     {
          statDayWork++;
-        System.Console.WriteLine("Чтобы работать нажми любую клавишу");
-        Console.ReadKey(true);
         int gamble = dice.Next(1, 6);
         if(gamble == 1)
         {
-            System.Console.WriteLine("Ты работал слишком плохо и тебе отказались платить");
+            GameLog.Add("Ти працював надто погано, і тобі відмовилися платити");
             Hung(-10);
-          
         }
         else if(gamble == 2)
         {
-            System.Console.WriteLine("Ты работал слишком хорошо и получил премию");
+            GameLog.Add("Ти працював чудово й отримав премію (+400)");
             Hung(-30);
             money += 400;
-         
         }
         else
         {
-            System.Console.WriteLine("Ты работал нормально и получил зарплату");
+            GameLog.Add("Ти працював нормально й отримав зарплату (+200)");
             Hung(-20);
             money += 200;
         }    
-    
-
-
     }
 
 public void GoToSleep(Random dice)
     {
-
          statDaySleep++;
-                    System.Console.WriteLine("Чтобы отдохнуть нажми любую клавишу");
-                    Console.ReadKey(true);
                     int gamble = dice.Next(1, 11);
                     if(gamble == 1)
                     {
-                        System.Console.WriteLine("Тебя мучала бесспоница и ты не смог уснуть");
+                        GameLog.Add("Тебе мучило безсоння, і ти не зміг заснути (-10hp)");
                         Hung(-10);
                         TakeDamage(10);
-                        
                     }
                     else
                     {
-                        System.Console.WriteLine("Ты хорошо отдохнул");
+                        GameLog.Add("Ти добре відпочив (+50% hp)");
                         Hung(-10);
                         Heal(50,true);
                     }
@@ -238,19 +214,11 @@ public void LevelUp()
                 Exp = Exp - 100*level;
                 level++;
                 UpdateLvlStats();
-                System.Console.WriteLine(Exp);
-                System.Console.WriteLine($"Новый уровень! {level}");
+                GameLog.Add($"Новий рівень! {level}");
             }
         else{levelupprogres = false;}
 
       }
     }
 
-protected void SearchFoodFight(Random dice, Player player, Enemy enemy)
-    {
-        System.Console.WriteLine($"Пока ты искал еду на тебя напал {enemy.name}!");
-        enemy.GenerateLevel(player.level, dice);
-        Combat.Fight(player, enemy);
-        Hung(100);
-    }
 }

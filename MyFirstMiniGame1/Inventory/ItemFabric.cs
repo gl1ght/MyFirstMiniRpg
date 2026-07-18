@@ -6,13 +6,13 @@ class ItemFabric
     {
         switch(name)
         {
-            case "Мясо волка":
+            case "М'ясо вовка":
                 return new WolfMeat();
 
-            case "Яблоко":
+            case "Яблуко":
                 return new Apple();
 
-            case "Мясо медведя":
+            case "М'ясо ведмедя":
                 return new BearMeat();
             case "Ягода":
                 return new Berry();

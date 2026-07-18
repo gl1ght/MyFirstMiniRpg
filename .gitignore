@@ -1,0 +1,11 @@
+# Артефакти збірки .NET
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+
+# Збереження гри (створюються під час гри)
+**/Saves/

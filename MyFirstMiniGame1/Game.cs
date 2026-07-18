@@ -33,7 +33,7 @@ class Game
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        player.SearchFood(dice, player);
+                        player.SearchFood(dice);
                         break;
                         
                     case ConsoleKey.D2:

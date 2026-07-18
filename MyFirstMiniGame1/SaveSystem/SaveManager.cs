@@ -146,6 +146,73 @@ class SaveManager
         int newInt = Convert.ToInt32(value);
         return(newInt);
     }
+
+    // ===== Методы для 2D-версии (без Console) =====
+
+    private const string SaveFolder = "Saves";
+
+    public static bool Save(Player player, string name)
+    {
+        try
+        {
+            if (!Directory.Exists(SaveFolder))
+                Directory.CreateDirectory(SaveFolder);
+
+            string path = Path.Combine(SaveFolder, name + ".xml");
+
+            XDocument save = new XDocument(
+                new XElement("Game",
+                    new XElement("Player",
+                        new XElement("level", player.level),
+                        new XElement("exp", player.Exp),
+                        new XElement("health", player.Health),
+                        new XElement("hunger", player.hunger),
+                        new XElement("money", player.money),
+                        new XElement("statDayAlive", player.statDayAlive),
+                        new XElement("statDayWork", player.statDayWork),
+                        new XElement("statDayEat", player.statDayEat),
+                        new XElement("statDaySleep", player.statDaySleep),
+                        player.Inventory.ToXml()
+                    )
+                )
+            );
+            save.Save(path);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public static List<string> ListSaves()
+    {
+        var result = new List<string>();
+        if (!Directory.Exists(SaveFolder))
+            return result;
+
+        foreach (string file in Directory.GetFiles(SaveFolder, "*.xml"))
+            result.Add(Path.GetFileNameWithoutExtension(file));
+
+        return result;
+    }
+
+    public static Player? Load(string name)
+    {
+        string path = Path.Combine(SaveFolder, name + ".xml");
+        if (!File.Exists(path))
+            return null;
+
+        try
+        {
+            XDocument loader = XDocument.Load(path);
+            return Player.LoadFromXml(loader.Root.Element("Player"));
+        }
+        catch
+        {
+            return null;
+        }
+    }
 }
 //Музей:
 //public static Player Load(SaveData data, Player currentPlayer)

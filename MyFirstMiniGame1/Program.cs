@@ -6,8 +6,8 @@ class Program
     
     static void Main(){
     
-        
-        Game.StartGame();
+        // 2D-версия игры. Старая консольная версия по-прежнему доступна через Game.StartGame().
+        Game2D.Run();
         
         }  
              
