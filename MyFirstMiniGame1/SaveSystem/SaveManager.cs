@@ -60,6 +60,7 @@ class SaveManager
         catch(System.UnauthorizedAccessException)
         {
             System.Console.WriteLine("Ошибка: не удалось сохранить файл");
+            break;
         }
     }
         break;

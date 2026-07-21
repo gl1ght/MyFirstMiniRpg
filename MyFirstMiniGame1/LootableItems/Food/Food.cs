@@ -3,6 +3,7 @@ class Food : LootableItems
 {
     protected int hungerbond;
     public int healbond;
+    public string descriptionOfFood = "Восстанавливает запас сытости. Некоторые продукты также могут немного восстановить здоровье.";
     public Food(string name, string description, int standartPrice, float weight,int hungerbond, int healbond) : base(name, description, standartPrice, weight)
     {
         //Имя, описание, базовая цена, вес, насыщение, лечение

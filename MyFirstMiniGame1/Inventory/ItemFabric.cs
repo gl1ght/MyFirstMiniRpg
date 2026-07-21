@@ -6,6 +6,9 @@ class ItemFabric
     {
         switch(name)
         {
+            case null:
+                System.Console.WriteLine("Ошибка:Предмет не найден");
+                return null;
             case "Мясо волка":
                 return new WolfMeat();
 
@@ -18,6 +21,12 @@ class ItemFabric
                 return new Berry();
             case "Гриб":
                 return new Mushroom();
+            case "Зелье исцеления":
+                return new HealPotion();
+            case "Зелье насыщения":
+                return new HungerPotion();
+            case "Зелье берсерка":
+                return new CombatPotion();
             
 
             default:

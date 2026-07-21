@@ -4,7 +4,7 @@ class Menu
     public static void ShowMenu(Player player)
         {
             Bet();
-            System.Console.WriteLine("Инструкция:\n1 - искать еду\n2 - работать\n3 - отдохнуть\n4 - инвентарь\n5 - статистика\n6 - сохранить\n7 - загрузить\nesc - выйти");
+            System.Console.WriteLine("Инструкция:\n1 - искать еду\n2 - идти на работу\n3 - разбить лагерь и отдохнуть\n4 - проверить инвентарь\n5 - статистика\nesc - выйти в меню");
             System.Console.WriteLine($"Уровень:{player.level}\nПрогресс до след уровня {player.Exp}/{player.level*100}\nЗдоровье:{player.Health}\nЕда:{player.Hunger}\nДеньги:{player.money}\nБазовый урон:{player.Damage}");
             Bet();
         }
@@ -14,6 +14,7 @@ class Menu
         Bet();
         System.Console.WriteLine("Выходим...");
         Bet();
+        Environment.Exit(0);
         return(false);
     }
 
@@ -40,7 +41,7 @@ class Menu
         Player player = Player.CreateNew();
         bool gameNotReady = true;
         while(gameNotReady){
-        System.Console.WriteLine("Выберите опцию:\n1 - начать новую игру\n2 - загрузить игру\n3 - miniwiki");
+        System.Console.WriteLine("Выберите опцию:\n1 - начать новую игру\n2 - загрузить игру\n3 - miniwiki\nesc - выйти");
         ConsoleKeyInfo option = System.Console.ReadKey(true);
             switch (option.Key)
             {
@@ -58,7 +59,10 @@ class Menu
 
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-                    System.Console.WriteLine("Сорян брочачо вики еще не готова");
+                    MiniWiki.MiniWikiMenu();
+                    break;
+                case ConsoleKey.Escape:
+                    GameLeave();
                     break;
                 default:
                     break;
@@ -91,4 +95,41 @@ class Menu
                 break;
         }
     }
+
+    public static Player InGameMenu(Player currentplayer, SaveData data)
+    {
+        bool inGameMenu = true;
+        while(inGameMenu)
+        {
+            System.Console.WriteLine("Выберите опцию:\n1 - продолжить\n2 - сохранить\n3 - загрузить\n4 - выйти в главное меню");
+            ConsoleKeyInfo option = System.Console.ReadKey(true);
+            switch (option.Key)
+            {
+                case ConsoleKey.D1:
+                case ConsoleKey.NumPad1:
+                    return currentplayer;
+                case ConsoleKey.D2:
+                case ConsoleKey.NumPad2:
+                    Menu.SaveChoice(currentplayer);
+                    return currentplayer;
+                case ConsoleKey.D3:
+                case ConsoleKey.NumPad3:
+                    inGameMenu = false;
+                    Player newLoadedPlayer = SaveManager.NewLoad(data, currentplayer);
+                    return newLoadedPlayer;
+                case ConsoleKey.D4:
+                case ConsoleKey.NumPad4:
+                    Player newPlayer = Menu.StartMenu(data);
+                    return newPlayer;
+                default:
+                    System.Console.WriteLine("Выберите что то из меню");
+                    break;
+                
+            }          
+        }
+        return null;
+    }
+
 }
+
+

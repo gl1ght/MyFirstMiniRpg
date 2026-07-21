@@ -3,7 +3,7 @@ using System.Xml.Linq;
 class Inventory
 {
     public List<InventorySlot> slots = new List<InventorySlot>();
-
+    public List<InventorySlot> combatSlots = new List<InventorySlot>();
    
     public void AddItem(LootableItems item, int amount = 1)
     {
@@ -206,4 +206,140 @@ public void LoadFromXml(XElement inventoryElement)
 
     return inventory;
 }
+
+ public bool CombatInventoryShow()
+    {
+            combatSlots.Clear();
+
+
+           Console.WriteLine("===== Доступные предметы =====");
+
+        if (slots.Count == 0)
+        {
+            Console.WriteLine("Доступных предметов нету.");
+            Menu.Bet();
+            return false;
+        }
+
+        foreach (InventorySlot slot in slots)
+            {
+                if (slot.Item.CanUseInCombat)
+                {
+                    combatSlots.Add(slot);
+                }
+            }
+
+        for (int i = 0; i < combatSlots.Count; i++)
+        {
+                    Console.WriteLine($"{i + 1}. {combatSlots[i].Item.Name} x{combatSlots[i].Count} {combatSlots[i].TotalWeight}kg");            
+        }
+        if(combatSlots.Count == 0)
+        {
+            Console.WriteLine("Доступных предметов нету.");
+            return false;
+        }
+        return true;
+    }
+
+
+public bool CombatUseChoise(Player player)
+    {
+        
+        bool inventoryactive = true;
+        while(inventoryactive)
+        {
+        try{
+        System.Console.WriteLine("Выберите предмет:");
+        player.Inventory.CombatInventoryShow();
+        System.Console.WriteLine("0 - Назад");
+        int choice = Convert.ToInt32(Console.ReadLine());
+        if(choice == 0)
+                {
+                    return false;
+                }
+        InventorySlot slot = player.Inventory.CombatGetSlot(choice - 1);
+
+    if (slot == null)
+    {
+        Console.WriteLine("Такого предмета нет.");
+        continue;
+    }
+    Console.WriteLine(slot.Item.Name);
+
+    Console.WriteLine("1 - Использовать");
+    Console.WriteLine("2 - Выбросить");
+    Console.WriteLine("3 - Информация");
+    Console.WriteLine("esc - Назад");
+    switch(Console.ReadKey(true).Key)
+    {
+    case ConsoleKey.D1:
+        player.Inventory.CombatUseItem(slot.Item, player);
+        break;
+
+    case ConsoleKey.D2:
+        System.Console.WriteLine("Введите количество");
+        string amount = Console.ReadLine();
+        if (int.TryParse(amount, out int result))
+        {
+            if(slot.Count >= result){
+                player.Inventory.RemoveItem(slot, result);
+            }
+            else
+            {
+            System.Console.WriteLine("У вас недостаточно предметов");           
+            }
+        }
+        else
+        {
+            Console.WriteLine("Неверный формат строки!");
+        }
+        break;
+
+    case ConsoleKey.D3:
+        slot.Item.ShowItemInfo();
+        break;
+    case ConsoleKey.Escape:
+        inventoryactive = false;
+        return false;
+    default:
+        System.Console.WriteLine("Выберите что то из списка");
+        break;
 }
+        }
+        catch (System.FormatException)
+        {
+            System.Console.WriteLine("Выбраного предмета несуществует");
+            return false;
+        }
+    }
+    return true;
+    }
+    
+
+public void CombatUseItem(LootableItems item, Player player)
+    {
+        foreach (InventorySlot slot in combatSlots)
+    {
+        if (slot.Item.GetType() == item.GetType())
+        {
+            slot.Item.Use(player);
+            slot.RemoveOne();
+            if (slot.Count == 0){
+                slots.Remove(slot);
+                combatSlots.Remove(slot);
+                return;
+            }
+            
+        }
+    }
+}
+
+    public InventorySlot CombatGetSlot(int index)
+    {
+    if (index < 0 || index >= combatSlots.Count)
+        return null;
+
+    return combatSlots[index];
+    }
+}
+

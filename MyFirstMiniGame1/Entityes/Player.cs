@@ -26,7 +26,7 @@ class Player : Entity
                 }}
 
 
-    public Player(SaveData data) : base(data.level,100, 20, "Игрок")
+    public Player(SaveData data) : base(data.level,100, 20, "Игрок","Обычный человек, оказавшийся один на один с дикой природой. Каждый новый день — это борьба за жизнь.")
     {
         
         level = data.level;
@@ -83,13 +83,11 @@ public void SearchFood(Random dice, Player player)
                         {
                         Wolf wolf = new Wolf();
                         SearchFoodFight(dice,player,wolf);
-                        player.Inventory.AddItem(new WolfMeat(), 2);
                         }
                         else if(gamble == 5)
                         {
                         Bear bear = new Bear();
                         SearchFoodFight(dice,player,bear);
-                        player.Inventory.AddItem(new BearMeat(), 2);
                         }
                     }
                     else
@@ -127,6 +125,7 @@ public void SearchFood(Random dice, Player player)
         System.Console.WriteLine("Чтобы работать нажми любую клавишу");
         Console.ReadKey(true);
         int gamble = dice.Next(1, 6);
+        int salary = 0;
         if(gamble == 1)
         {
             System.Console.WriteLine("Ты работал слишком плохо и тебе отказались платить");
@@ -135,16 +134,21 @@ public void SearchFood(Random dice, Player player)
         }
         else if(gamble == 2)
         {
-            System.Console.WriteLine("Ты работал слишком хорошо и получил премию");
+            salary = 400;
+            Expi(20);
             Hung(-30);
-            money += 400;
+            Mony(salary);
+            System.Console.WriteLine($"Ты работал слишком хорошо и получил премию +{salary} шекелей");
          
         }
         else
         {
-            System.Console.WriteLine("Ты работал нормально и получил зарплату");
+            
+            salary = 200;
+            Expi(10);
             Hung(-20);
-            money += 200;
+            Mony(salary);
+            System.Console.WriteLine($"Ты работал нормально и получил зарплату +{salary} шекелей");
         }    
     
 
@@ -224,6 +228,7 @@ public void Mony(int mony)
 public void Expi(int expi)
     {
         this.Exp += expi;
+        this.LevelUp();
     }
 
 public void LevelUp()
@@ -251,6 +256,5 @@ protected void SearchFoodFight(Random dice, Player player, Enemy enemy)
         System.Console.WriteLine($"Пока ты искал еду на тебя напал {enemy.name}!");
         enemy.GenerateLevel(player.level, dice);
         Combat.Fight(player, enemy);
-        Hung(100);
     }
 }

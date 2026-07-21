@@ -55,18 +55,8 @@ class Game
                         Menu.StatsCheck(player);
                         nextDay = false;
                         break;
-                    case ConsoleKey.D6:
-                    case ConsoleKey.NumPad6:
-                        Menu.SaveChoice(player);
-                        nextDay = false;
-                        break; 
-                    case ConsoleKey.D7:
-                    case ConsoleKey.NumPad7:
-                        player = SaveManager.NewLoad(data, player);
-                        nextDay = false;
-                        break; 
                     case ConsoleKey.Escape:
-                        gameOnline = Menu.GameLeave();
+                        player = Menu.InGameMenu(player, data);
                         nextDay = false;
                         break; 
                     default:
