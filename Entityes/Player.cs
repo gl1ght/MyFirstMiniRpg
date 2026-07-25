@@ -97,17 +97,17 @@ public void SearchFood(Random dice, Player player)
                         {
                           case 1:
                           gamble = dice.Next(3, 7);
-                          player.Inventory.AddItem(new Mushroom(), gamble);
+                          player.Inventory.GameAddItem(player, new Mushroom(), gamble);
                           System.Console.WriteLine($"Ты нашел грибы {gamble}");
                           break;  
                           case 2:
                           gamble = dice.Next(3, 7);
-                          player.Inventory.AddItem(new Berry(), gamble);
+                          player.Inventory.GameAddItem(player, new Berry(), gamble);
                           System.Console.WriteLine($"Ты нашел ягоды {gamble}");
                           break;  
                           case 3:
                           gamble = dice.Next(3, 7);
-                          player.Inventory.AddItem(new Apple(), gamble);
+                          player.Inventory.GameAddItem(player, new Apple(), gamble);
                           System.Console.WriteLine($"Ты нашел яблоки {gamble}");
                           break;  
                         }
@@ -177,28 +177,7 @@ public void GoToSleep(Random dice)
                     }
     }
 
-    public static Player LoadFromXml(XElement element)
-{
-    SaveData data = new SaveData();
 
-    data.level = (int)element.Element("level");
-    data.exp = (int)element.Element("exp");
-    data.Health = (int)element.Element("health");
-    data.Hunger = (int)element.Element("hunger");
-    data.money = (int)element.Element("money");
-    data.statDayAlive = (int)element.Element("statDayAlive");
-    data.statDayEat = (int)element.Element("statDayEat");
-    data.statDayWork = (int)element.Element("statDayWork");
-    data.statDaySleep = (int)element.Element("statDaySleep");
-
-    Player player = new Player(data);
-
-    XElement inventoryElement = element.Element("Inventory");
-
-    player.Inventory.LoadFromXml(inventoryElement);
-
-    return player;
-}
 
 public void NewDay()
     {

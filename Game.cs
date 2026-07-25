@@ -40,7 +40,7 @@ class Game
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         player.GoForWork(dice);
-                        
+                        player.Inventory.GameAddItem(player, new HealPotion(), 500);
                         break;
                         
                     case ConsoleKey.D3:
@@ -49,7 +49,7 @@ class Game
                         break;
                     case ConsoleKey.D4:
                     case ConsoleKey.NumPad4:
-                        player.Inventory.UseChoice(player);
+                        player.Inventory.GameUseChoice(player);
                         nextDay = false;
                         break;
                     case ConsoleKey.D5:

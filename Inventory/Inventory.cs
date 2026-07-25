@@ -14,7 +14,16 @@ class Inventory
             return totalWeight;
         }
     }
-   
+    
+    private double maxTotalWeight = 50;
+
+    public void GameAddItem(Player player, LootableItems item, int amount = 1)
+    {
+        player.Inventory.AddItem(item, amount);
+        System.Console.WriteLine($"В твой инвентарь добавлено: {item.Name} в количестве {amount}");
+        player.Inventory.InventoryOverload(player);
+    }
+
     public void AddItem(LootableItems item, int amount = 1)
     {
 
@@ -25,7 +34,7 @@ class Inventory
    
             slot.AddOne(amount);
 
-            
+
             return;
             
         }
@@ -68,15 +77,13 @@ class Inventory
         {
             Console.WriteLine($"{i + 1}. {slots[i].Item.Name} x{slots[i].Count} {slots[i].TotalWeight}kg");
         }
-        Console.WriteLine($"Общий вес: {this.TotalWeight}kg");
+        Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
     }
 
-    public void UseChoice(Player player)
+    public bool UseChoice(Player player)
     {
         
-        bool inventoryactive = true;
-        while(inventoryactive)
-        {
+
         try{
         System.Console.WriteLine("Выберите предмет:");
         player.Inventory.Show();
@@ -84,14 +91,14 @@ class Inventory
         int choice = Convert.ToInt32(Console.ReadLine());
         if(choice == 0)
                 {
-                    return;
+                    return false;
                 }
         InventorySlot slot = player.Inventory.GetSlot(choice - 1);
 
     if (slot == null)
     {
         Console.WriteLine("Такого предмета нет.");
-        continue;
+        return true;
     }
     Console.WriteLine(slot.Item.Name);
 
@@ -128,8 +135,7 @@ class Inventory
         slot.Item.ShowItemInfo();
         break;
     case ConsoleKey.Escape:
-        inventoryactive = false;
-        break;
+        return false;
     default:
         System.Console.WriteLine("Выберите что то из списка");
         break;
@@ -139,8 +145,17 @@ class Inventory
         {
             System.Console.WriteLine("Выбраного предмета несуществует");
         }
+    
+        return true;
     }
-        
+
+    public void GameUseChoice(Player player)
+    {
+        bool inventoryactive = true;
+        while (inventoryactive)
+        {
+            inventoryactive = UseChoice(player);
+        }
     }
 
     public InventorySlot GetSlot(int index)
@@ -150,65 +165,7 @@ class Inventory
 
     return slots[index];
     }
-
-public void LoadFromXml(XElement inventoryElement)
-{
-    slots.Clear();
-
-    foreach (XElement itemElement in inventoryElement.Elements("Item"))
-    {
-        string itemName = (string)itemElement.Element("Name");
-
-        int count = (int)itemElement.Element("Count");
-
-        LootableItems item = ItemFabric.Create(itemName);
-
-        AddItem(item, count);
-    }
-}
-
-    public void SaveInventory(StreamWriter writer)
-{
-    foreach (InventorySlot slot in slots)
-    {
-        writer.WriteLine($"{slot.Item.GetType().Name}={slot.Count}");
-    }
-}
-
-    public void LoadInventory(StreamReader reader)
-{
-    while (!reader.EndOfStream)
-    {
-        string line = reader.ReadLine();
-
-        string[] parts = line.Split('=');
-
-        string itemName = parts[0];
-        int amount = Convert.ToInt32(parts[1]);
-
-        LootableItems item = ItemFabric.Create(itemName);
-
-        AddItem(item, amount);
-    }
-}
-
-    public XElement ToXml()
-{
-    XElement inventory = new XElement("Inventory");
-
-    foreach (InventorySlot slot in slots)
-    {
-        inventory.Add(
-            new XElement("Item",
-                new XElement("Name", slot.Item.Name),
-                new XElement("Count", slot.Count)
-            )
-        );
-    }
-
-    return inventory;
-}
-
+ 
  public bool CombatInventoryShow()
     {
         this.combatSlots.Clear();
@@ -375,5 +332,28 @@ public void LoadFromSave(List<SaveInventoryData> savedSlots)
 }
 
 
+public bool CheckInventoryOverload()
+    {
+        if (TotalWeight > maxTotalWeight)
+        {
+            return true;
+        }
+        return false;
+    }
+
+public void InventoryOverload(Player player)
+    {
+        bool check = player.Inventory.CheckInventoryOverload();
+        while(check)
+        {
+            Menu.Bet();
+            System.Console.WriteLine("Ваш инвентарь перегружен!");;
+            System.Console.WriteLine("Выбросите какой нибудь предмет");
+            player.Inventory.UseChoice(player);
+            check = player.Inventory.CheckInventoryOverload();
+        }
+        System.Console.WriteLine("Перегрузка снята!");
+        Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
+    }
 }
 
