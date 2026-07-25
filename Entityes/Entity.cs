@@ -1,5 +1,5 @@
 
-abstract class Entity
+public abstract class Entity
 {
     Random dice = new Random();
     public string name{get; protected set;}
@@ -8,12 +8,12 @@ abstract class Entity
     public int MaxHealth{ get; protected set; }
     public bool isAlive = true;
     public int level{get; protected set;}
-    public int basedamage{get; protected set;}
+    public int baseDamage{get; protected set;}
     public int baseHealth{get; protected set;}
     public string description{get; protected set;}
 
 
-    public int Damage{get{return damage;}  set
+     public virtual int Damage{get{return damage;}  set
             {
                 damage = value;
                 
@@ -34,7 +34,7 @@ public Entity(int level, int baseHealthValue, int baseDamage, string name, strin
 {
     this.level = level;
     this.baseHealth = baseHealthValue;
-    this.basedamage = baseDamage;
+    this.baseDamage = baseDamage;
     this.name = name;
     this.description = description;
 
@@ -75,7 +75,7 @@ public void UpdateLvlStats()
 {
     MaxHealth = baseHealth + (level - 1) * 15;
     Health = MaxHealth;
-    Damage = basedamage + (level - 1) * 3;
+    Damage = baseDamage + (level - 1) * 3;
 }
 
 public void AddDamage(int amount)
@@ -89,6 +89,6 @@ public virtual void ShowInfoEntity()
         Console.WriteLine($"Описание: {description}");
         Console.WriteLine($"Уровень: {level}");
         Console.WriteLine($"Здоровье: {baseHealth}");
-        Console.WriteLine($"Урон: {basedamage}");
+        Console.WriteLine($"Урон: {baseDamage}");
     }
 }

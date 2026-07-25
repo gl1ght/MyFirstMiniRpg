@@ -1,5 +1,5 @@
 
-abstract class Enemy : Entity
+public abstract class Enemy : Entity
 {
     public int ExpReward { get; protected set; }
     public int MoneyReward { get; protected set; }

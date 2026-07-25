@@ -7,6 +7,7 @@ class Player : Entity
 {
     
     public Inventory Inventory { get; private set; }
+    public Equipment Equipment { get; } = new Equipment();
     public int money {get; private set;}= 1000;
     public int hunger{get; private set;} = 100;
     public int statDayAlive {get; private set;}= 0;
@@ -25,7 +26,17 @@ class Player : Entity
                 hunger = value;
                 }}
 
+    public override int Damage
+    {
+        get
+        {
+            int damage = base.Damage;
 
+            if (Equipment.Weapon != null)
+                damage += Equipment.Weapon.DamageBuff;
+            return damage;
+        }
+    }
     public Player(SaveData data) : base(data.level,100, 20, "Игрок","Обычный человек, оказавшийся один на один с дикой природой. Каждый новый день — это борьба за жизнь.")
     {
         
@@ -63,6 +74,9 @@ public static Player CreateNew()
 
         return new Player(data);
     }
+
+
+ 
 
 public void SearchFood(Random dice, Player player)
         {
@@ -236,4 +250,11 @@ protected void SearchFoodFight(Random dice, Player player, Enemy enemy)
         enemy.GenerateLevel(player.level, dice);
         Combat.Fight(player, enemy);
     }
+
+public void Damg(int damg)
+    {
+        Damage += damg;
+    }
+
 }
+

@@ -19,29 +19,34 @@ class Inventory
 
     public void GameAddItem(Player player, LootableItems item, int amount = 1)
     {
+
         player.Inventory.AddItem(item, amount);
         System.Console.WriteLine($"В твой инвентарь добавлено: {item.Name} в количестве {amount}");
         player.Inventory.InventoryOverload(player);
     }
 
     public void AddItem(LootableItems item, int amount = 1)
+{
+    if (item.CanStack)
     {
+        InventorySlot slot = slots.FirstOrDefault(s => s.Item.GetType() == item.GetType());
 
-    foreach (InventorySlot slot in slots)
-    {
-        if (slot.Item.GetType() == item.GetType())
+        if (slot != null)
         {
-   
             slot.AddOne(amount);
-
-
             return;
-            
+        }
+
+        slots.Add(new InventorySlot(item, amount));
+    }
+    else
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            slots.Add(new InventorySlot(item, 1));
         }
     }
-    
-    slots.Add(new InventorySlot(item, amount));
-    }
+}
 
     public void RemoveItem(InventorySlot slot, int amount)
     {
@@ -53,15 +58,30 @@ class Inventory
     }
     
     public void UseItem(LootableItems item, Player player)
-    {
+{
     InventorySlot slot = slots.FirstOrDefault(s => s.Item.GetType() == item.GetType());
-    slot.Item.Use(player);
-    slot.RemoveOne();
-    if (slot.Count == 0){ 
-        slots.Remove(slot);}
 
-        
+    if (slot == null)
+    {
+        Console.WriteLine("Такого предмета нет.");
+        return;
     }
+
+    if (slot.Item is not IUsable usable)
+    {
+        Console.WriteLine("Этот предмет нельзя использовать.");
+        return;
+    }
+
+    usable.Use(player);
+
+    slot.RemoveOne();
+
+    if (slot.Count == 0)
+    {
+        slots.Remove(slot);
+    }
+}
 
    public void Show()
     {
@@ -109,7 +129,18 @@ class Inventory
     switch(Console.ReadKey(true).Key)
     {
     case ConsoleKey.D1:
-        player.Inventory.UseItem(slot.Item, player);
+          Console.WriteLine(slot.Item.GetType().Name);
+            Console.WriteLine(slot.Item is IEquipable);
+        if(slot.Item is IEquipable)
+        {
+          
+            EquipItem(slot, player);
+        }
+        else if(slot.Item is IUsable)
+        {
+            player.Inventory.UseItem(slot.Item, player);      
+        }
+        
         break;
 
     case ConsoleKey.D2:
@@ -278,7 +309,13 @@ public void CombatUseItem(LootableItems item, Player player)
     {
         if (slot.Item.GetType() == item.GetType())
         {
-            slot.Item.Use(player);
+        if (slot.Item is not IUsable usable)
+        {
+            Console.WriteLine("Этот предмет нельзя использовать.");
+            return;
+        }
+
+        usable.Use(player);
             slot.RemoveOne();
             if (slot.Count == 0){
                 slots.Remove(slot);
@@ -355,5 +392,17 @@ public void InventoryOverload(Player player)
         System.Console.WriteLine("Перегрузка снята!");
         Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
     }
+
+public void EquipItem(InventorySlot slot, Player player)
+{
+    bool success = player.Equipment.Equip(slot, player);
+
+    if (!success)
+    {
+        Console.WriteLine("Этот предмет нельзя экипировать.");
+    }
 }
+}
+    
+
 

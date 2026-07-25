@@ -1,10 +1,10 @@
 
-class CombatPotion : Potion
+class CombatPotion : Potion, IUsable
 
 {
     public override bool CanUseInCombat => true;
     private int combatPotionDamegaBuff = 25;
-    public CombatPotion() : base("Зелье берсерка", "Временно усиливает боевые способности. Использование занимает один ход.", 100, 0.4F, 0, 10, 6)
+    public CombatPotion() : base(true, "Зелье берсерка", "Временно усиливает боевые способности. Использование занимает один ход.", 100, 0.4F, 0, 10, 6)
     {
              //Имя, описание, базовая цена, вес, насыщение, лечение, длительность действия
     }
@@ -16,7 +16,7 @@ public override void ShowItemInfo()
     Menu.Bet();
     }
 
-    public override void Use(Player player)
+    public void Use(Player player)
     {
         int damageBuff = player.Damage * combatPotionDamegaBuff / 100;
         player.AddDamage(damageBuff);

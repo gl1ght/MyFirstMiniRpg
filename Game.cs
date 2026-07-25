@@ -18,7 +18,7 @@ class Game
         SaveData data = new SaveData();
         Player player = Menu.StartMenu(data);
         player.UpdateLvlStats();
-
+        player.Inventory.AddItem(new WoodenSword(), 10);
 
 
         while(gameOnline)
@@ -40,7 +40,6 @@ class Game
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         player.GoForWork(dice);
-                        player.Inventory.GameAddItem(player, new HealPotion(), 500);
                         break;
                         
                     case ConsoleKey.D3:

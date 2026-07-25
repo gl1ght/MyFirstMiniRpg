@@ -5,17 +5,19 @@ abstract class LootableItems
 {
     public virtual bool CanUseInCombat => false;
      public string Name { get; protected set; }
+      public bool CanStack { get; protected set; }
     public string Description { get; protected set; }
     public int StandartPrice { get; protected set; }
     public float Weight { get; protected set; }
-    public LootableItems(string name, string description, int standartPrice, float weight)
+    public LootableItems(bool canStack,string name, string description, int standartPrice, float weight)
     {
         Name = name;
         Description = description;
         StandartPrice = standartPrice;
         Weight = weight;
+        CanStack = canStack;
     }
-    public abstract void Use(Player player);
+
 
     public virtual void ShowItemInfo()
     {
@@ -35,4 +37,25 @@ public virtual void ShowInfoItem(LootableItems item)
         Console.WriteLine($"Вес: {item.Weight}");
     }
 
+  
+}
+ 
+ interface IUsable
+    {
+        void Use(Player player);
+    }
+
+enum EquipmentSlot
+{
+    Head,
+    Body,
+    Legs,
+    Weapon,
+    Shield,
+    Accessory
+}
+
+interface IEquipable
+{
+    EquipmentSlot Slot { get; }
 }

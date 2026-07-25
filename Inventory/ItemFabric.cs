@@ -27,6 +27,12 @@ class ItemFabric
                 return new HungerPotion();
             case "Зелье берсерка":
                 return new CombatPotion();
+            case "Бревно":
+                return new Wood();
+            case "Камень":
+                return new Stone();
+            case "Деревянный меч":
+                return new WoodenSword();
             
 
             default:
