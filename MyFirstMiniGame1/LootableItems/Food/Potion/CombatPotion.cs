@@ -25,4 +25,14 @@ public override void ShowItemInfo()
     {
        
     }
+
+    public override void ShowInfoItem(LootableItems item)
+    {
+        base.ShowInfoItem(item);
+        if (item is CombatPotion combatPotion)
+        {
+            Console.WriteLine($"Временный бонус к урону: {combatPotion.combatPotionDamegaBuff}%");
+            Console.WriteLine($"Длительность действия: {combatPotion.duration} ходов");
+        }
+    }
 }

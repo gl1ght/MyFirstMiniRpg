@@ -4,6 +4,16 @@ class Inventory
 {
     public List<InventorySlot> slots = new List<InventorySlot>();
     public List<InventorySlot> combatSlots = new List<InventorySlot>();
+    private double totalWeight;
+    public double TotalWeight
+    {
+        get
+        {
+            totalWeight = 0;
+            totalWeight = slots.Sum(slot => slot.TotalWeight);
+            return totalWeight;
+        }
+    }
    
     public void AddItem(LootableItems item, int amount = 1)
     {
@@ -35,21 +45,12 @@ class Inventory
     
     public void UseItem(LootableItems item, Player player)
     {
-       foreach (InventorySlot slot in slots)
-    {
-        if (slot.Item.GetType() == item.GetType())
-        {
-            slot.Item.Use(player);
-            slot.RemoveOne();
-            if (slot.Count == 0){
-                slots.Remove(slot);
-                return;
-            }
-            
-        }
-    }
-    
-        
+    InventorySlot slot = slots.FirstOrDefault(s => s.Item.GetType() == item.GetType());
+    slot.Item.Use(player);
+    slot.RemoveOne();
+    if (slot.Count == 0){ 
+        slots.Remove(slot);}
+
         
     }
 
@@ -67,6 +68,7 @@ class Inventory
         {
             Console.WriteLine($"{i + 1}. {slots[i].Item.Name} x{slots[i].Count} {slots[i].TotalWeight}kg");
         }
+        Console.WriteLine($"Общий вес: {this.TotalWeight}kg");
     }
 
     public void UseChoice(Player player)
@@ -209,7 +211,7 @@ public void LoadFromXml(XElement inventoryElement)
 
  public bool CombatInventoryShow()
     {
-            combatSlots.Clear();
+        this.combatSlots.Clear();
 
 
            Console.WriteLine("===== Доступные предметы =====");
@@ -220,14 +222,11 @@ public void LoadFromXml(XElement inventoryElement)
             Menu.Bet();
             return false;
         }
+    
 
-        foreach (InventorySlot slot in slots)
-            {
-                if (slot.Item.CanUseInCombat)
-                {
-                    combatSlots.Add(slot);
-                }
-            }
+        var combatSlots = slots.Where(slot => slot.Item.CanUseInCombat).ToList();
+        this.combatSlots = combatSlots;
+
 
         for (int i = 0; i < combatSlots.Count; i++)
         {
@@ -341,5 +340,40 @@ public void CombatUseItem(LootableItems item, Player player)
 
     return combatSlots[index];
     }
+
+    public List<InventorySlot> GetSlots()
+    {
+        return slots;
+    }
+
+    public List<SaveInventoryData> GetSlotsForSave()
+{
+    List<SaveInventoryData> result = new();
+
+    foreach (InventorySlot slot in slots)
+    {
+        result.Add(new SaveInventoryData(slot.Item.GetType().Name, slot.Count));
+    }
+
+    return result;
+}
+
+
+public void LoadFromSave(List<SaveInventoryData> savedSlots)
+{
+    slots.Clear();
+
+    foreach (var saved in savedSlots)
+    {
+        LootableItems item = ItemFabric.Create(saved.ItemName);
+
+        if (item != null)
+        {
+            AddItem(item, saved.Count);
+        }
+    }
+}
+
+
 }
 

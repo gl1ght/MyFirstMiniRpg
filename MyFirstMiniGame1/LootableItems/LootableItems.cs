@@ -27,6 +27,12 @@ System.Console.WriteLine(@$"Цена: {StandartPrice}
 
     }
 
-
+public virtual void ShowInfoItem(LootableItems item)
+    {
+        Console.WriteLine($"Имя: {item.Name}");
+        Console.WriteLine($"Описание: {item.Description}");
+        Console.WriteLine($"Цена: {item.StandartPrice}");
+        Console.WriteLine($"Вес: {item.Weight}");
+    }
 
 }

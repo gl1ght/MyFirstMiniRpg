@@ -24,5 +24,13 @@ class Food : LootableItems
     Menu.Bet();
     }
 
-
+    public override void ShowInfoItem(LootableItems item)
+    {
+        base.ShowInfoItem(item);
+        if (item is Food food)
+        {
+            Console.WriteLine($"Востановление голода: {food.hungerbond}");
+            Console.WriteLine($"Востановление здоровья: {food.healbond}%");
+        }
+    }
 }

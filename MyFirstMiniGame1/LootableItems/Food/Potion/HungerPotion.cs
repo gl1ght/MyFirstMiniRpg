@@ -15,4 +15,10 @@ class HungerPotion : Potion
     {
         
     }
+
+    public override void ShowInfoItem(LootableItems item)
+    {
+        base.ShowInfoItem(item);
+
+    }
 }

@@ -30,6 +30,7 @@ class ItemFabric
             
 
             default:
+                System.Console.WriteLine("Ошибка:Предмет не найден");
                 return null;
         }
     }

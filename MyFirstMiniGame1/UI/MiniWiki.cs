@@ -1,74 +1,86 @@
 
 class MiniWiki
 {
-    public static void ShowInfoEntity(Entity entity)
-    {
-        Console.WriteLine($"Имя: {entity.name}");
-        Console.WriteLine($"Описание: {entity.description}");
-        Console.WriteLine($"Уровень: {entity.level}");
-        Console.WriteLine($"Здоровье: {entity.baseHealth}");
-        Console.WriteLine($"Урон: {entity.basedamage}");
-    }
-    public static void ShowInfoItem(LootableItems item)
-    {
-        Console.WriteLine($"Имя: {item.Name}");
-        Console.WriteLine($"Описание: {item.Description}");
-        Console.WriteLine($"Цена: {item.StandartPrice}");
-        Console.WriteLine($"Вес: {item.Weight}");
-    }
+    
+    
     
     public static void MiniWikiMenu()
     {
     while (true)
     {
         Console.WriteLine("Выберите категорию для просмотра:");
+        Console.WriteLine("0. Выход");
         Console.WriteLine("1. Существа");
         Console.WriteLine("2. Предметы");
-        Console.WriteLine("3. Выход");
-        string choice = Console.ReadLine();
-        switch (choice)
+        ConsoleKeyInfo key = Console.ReadKey(true);
+
+        switch (key.Key)
         {
-            case "1":
+            case ConsoleKey.D1:
+            case ConsoleKey.NumPad1:
                 ShowAllCreatures();
                 break;
-            case "2":
+
+            case ConsoleKey.D2:
+            case ConsoleKey.NumPad2:
                 ShowAllItems();
                 break;
-            case "3":
+
+            case ConsoleKey.D0:
+            case ConsoleKey.NumPad0:
                 return;
-            default:
-                Console.WriteLine("Неверный выбор. Попробуйте снова.");
-                MiniWikiMenu();
-                break;
         }
     }
     }
 
     public static void ShowAllCreatures()
     {
+        Entity entity = null;
+        while (true)
+        {
         Console.WriteLine("Существа:");
+        Console.WriteLine("0. Назад");
         Console.WriteLine("1. Бандит");
         Console.WriteLine("2. Гигантский паук");
         Console.WriteLine("3. Слизень");
         Console.WriteLine("4. Медведь");
-        Console.WriteLine("5. Назад");
+        Console.WriteLine("5. Волк");
+        Console.WriteLine("6. Гоблин");
+        Console.WriteLine("7. Игрок");
+
         string choice = Console.ReadLine();
         switch (choice)
         {
             case "1":
-                ShowInfoEntity(new Bandit());
+                entity = new Bandit();
+                entity.ShowInfoEntity();
                 break;
             case "2":
-                ShowInfoEntity(new GiantSpider());
+                entity = new GiantSpider();
+                entity.ShowInfoEntity();
                 break;
             case "3":
-                ShowInfoEntity(new Slime());
+                entity = new Slime();
+                entity.ShowInfoEntity();
                 break;
             case "4":
-                ShowInfoEntity(new Bear());
+                entity = new Bear();
+                entity.ShowInfoEntity();
                 break;
             case "5":
-                MiniWikiMenu();
+                entity = new Wolf();
+                entity.ShowInfoEntity();
+                break;
+            case "6":
+                entity = new Goblin();
+                entity.ShowInfoEntity();
+                break;
+            case "7":
+                Player wikiplayer = Player.CreateNew();
+                entity = wikiplayer;
+                entity.ShowInfoEntity();
+                break;
+            case "0":
                 return;
             default:
                 Console.WriteLine("Неверный выбор. Попробуйте снова.");
@@ -76,10 +88,15 @@ class MiniWiki
                 break;
         }
     }
+    }
 
     public static void ShowAllItems()
     {
+    LootableItems item = null;
+    while (true)
+    {
         Console.WriteLine("Предметы:");
+        Console.WriteLine("0. Назад");
         Console.WriteLine("1. Мясо волка");
         Console.WriteLine("2. Яблоко");
         Console.WriteLine("3. Мясо медведя");
@@ -88,36 +105,42 @@ class MiniWiki
         Console.WriteLine("6. Зелье исцеления");
         Console.WriteLine("7. Зелье насыщения");
         Console.WriteLine("8. Зелье берсерка");
-        Console.WriteLine("9. Назад");
         string choice = Console.ReadLine();
         switch (choice)
         {
             case "1":
-                ShowInfoItem(new WolfMeat());
+                item = new WolfMeat();
+                item.ShowInfoItem(item);
                 break;
             case "2":
-                ShowInfoItem(new Apple());
+                item = new Apple();
+                item.ShowInfoItem(item);
                 break;
             case "3":
-                ShowInfoItem(new BearMeat());
+                item = new BearMeat();
+                item.ShowInfoItem(item);
                 break;
             case "4":
-                ShowInfoItem(new Berry());
+                item = new Berry();
+                item.ShowInfoItem(item);
                 break;
             case "5":
-                ShowInfoItem(new Mushroom());
+                item = new Mushroom();
+                item.ShowInfoItem(item);
                 break;
             case "6":
-                ShowInfoItem(new HealPotion());
+                item = new HealPotion();
+                item.ShowInfoItem(item);
                 break;
             case "7":
-                ShowInfoItem(new HungerPotion());
+                item = new HungerPotion();
+                item.ShowInfoItem(item);
                 break;
             case "8":
-                ShowInfoItem(new CombatPotion());
+                item = new CombatPotion();
+                item.ShowInfoItem(item);
                 break;
-            case "9":
-                MiniWikiMenu();
+            case "0":
                 return;
             default:
                 Console.WriteLine("Неверный выбор. Попробуйте снова.");
@@ -125,7 +148,7 @@ class MiniWiki
                 break;
         }
     }
-
+    }
 
 
 }

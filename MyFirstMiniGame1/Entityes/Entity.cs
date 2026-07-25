@@ -83,4 +83,12 @@ public void AddDamage(int amount)
     Damage += amount;
 }
 
+public virtual void ShowInfoEntity()
+    {
+        Console.WriteLine($"Имя: {name}");
+        Console.WriteLine($"Описание: {description}");
+        Console.WriteLine($"Уровень: {level}");
+        Console.WriteLine($"Здоровье: {baseHealth}");
+        Console.WriteLine($"Урон: {basedamage}");
+    }
 }

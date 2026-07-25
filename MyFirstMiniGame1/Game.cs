@@ -19,9 +19,10 @@ class Game
         Player player = Menu.StartMenu(data);
         player.UpdateLvlStats();
 
+
+
         while(gameOnline)
         {
-            player.LevelUp();
             player.AliveCheckByHN();
             player.AliveCheckByHP();
             if(player.isAlive)
@@ -39,6 +40,7 @@ class Game
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
                         player.GoForWork(dice);
+                        
                         break;
                         
                     case ConsoleKey.D3:
