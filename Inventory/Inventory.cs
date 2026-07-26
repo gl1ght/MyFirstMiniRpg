@@ -15,7 +15,7 @@ class Inventory
         }
     }
     
-    private double maxTotalWeight = 50;
+    
 
     public void GameAddItem(Player player, LootableItems item, int amount = 1)
     {
@@ -98,7 +98,6 @@ class Inventory
         {
             Console.WriteLine($"{i + 1}. {slots[i].Item.Name} x{slots[i].Count} {slots[i].TotalWeight}kg");
         }
-        Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
     }
 
     public bool UseChoice(Player player)
@@ -108,6 +107,7 @@ class Inventory
         try{
         System.Console.WriteLine("Выберите предмет:");
         player.Inventory.Show();
+        Console.WriteLine($"{player.MaxTotalWeight}kg/{TotalWeight}kg");
         System.Console.WriteLine("0 - Назад");
         int choice = Convert.ToInt32(Console.ReadLine());
         if(choice == 0)
@@ -381,9 +381,9 @@ public void LoadFromSave(List<SaveInventoryData> savedSlots)
 }
 
 
-public bool CheckInventoryOverload()
+public bool CheckInventoryOverload(Player player)
     {
-        if (TotalWeight > maxTotalWeight)
+        if (TotalWeight > player.MaxTotalWeight)
         {
             return true;
         }
@@ -392,18 +392,18 @@ public bool CheckInventoryOverload()
 
 public void InventoryOverload(Player player)
     {
-        bool check = player.Inventory.CheckInventoryOverload();
+        bool check = player.Inventory.CheckInventoryOverload(player);
         while(check)
         {
             Menu.Bet();
             System.Console.WriteLine("Ваш инвентарь перегружен!");;
             System.Console.WriteLine("Выбросите какой нибудь предмет");
             player.Inventory.UseChoice(player);
-            check = player.Inventory.CheckInventoryOverload();
+            check = player.Inventory.CheckInventoryOverload(player);
             if (!check)
             {
                 System.Console.WriteLine("Перегрузка снята!");
-                Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
+                Console.WriteLine($"{player.MaxTotalWeight}kg/{TotalWeight}kg");
             }
         }
         

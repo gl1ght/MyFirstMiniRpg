@@ -49,7 +49,17 @@ public int ProtectionLevel
     }
 }
 
-
+public double MaxTotalWeight
+    {
+        get
+        {
+            int maxTotalWeight = 50;
+         if (Equipment.Backpack != null)
+                maxTotalWeight += Equipment.Weapon.DamageBuff;
+        return maxTotalWeight;
+        } 
+        
+    }
 
 
     public override int Damage
@@ -290,5 +300,9 @@ public void PlayerReceiveAttack(int damage, Player player)
 
     player.TakeDamage(finalDamage);
 }
+
+
+
+
 }
 

@@ -39,6 +39,13 @@ class Equipment
 
                 EquipBoots((Boots)slot.Item, player);
                 break;
+            case EquipmentSlot.Legs:
+                EquipLegs((Legs)slot.Item, player);
+                break;
+            case EquipmentSlot.Backpack:
+                EquipBackpack((Backpack)slot.Item, player);
+                break;
+            
         }
 
         player.Inventory.RemoveItem(slot, 1);
@@ -85,6 +92,14 @@ class Equipment
             player.Inventory.AddItem(Backpack, 1);
 
         Backpack = backpack;
+    }
+
+    private void EquipLegs(Legs legs, Player player)
+    {
+        if (Legs != null)
+            player.Inventory.AddItem(Legs, 1);
+
+        Legs = legs;
     }
 
     public void UnequipWeapon(Player player)
