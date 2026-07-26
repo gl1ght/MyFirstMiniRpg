@@ -7,7 +7,7 @@ class SaveData
         public int exp { get; set; } = 0;
         public int Health { get; set; } = 100;
         public int Hunger { get; set; } = 100;
-        public int money { get; set; } = 1000;
+        public int money { get; set; } = 200;
         public int statDayAlive { get; set; } = 0;
         public int statDaySleep { get; set; } = 0;
         public int statDayWork { get; set; } = 0;

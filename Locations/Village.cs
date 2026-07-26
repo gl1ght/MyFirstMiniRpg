@@ -2,6 +2,8 @@
 class Village : Location
 {
     Random dice = new Random();
+    Merchant merchant = new Merchant();
+
     public Village() : base("Деревня", "Небольшое сельское поселение, жители которого обычно занимаются сельским хозяйством.")
     {
     }
@@ -37,6 +39,8 @@ class Village : Location
             switch (Console.ReadKey(true).Key)
             {
                 case ConsoleKey.D1:
+                    merchant.CheckRefresh();
+                    merchant.ShowShop();
                     nextDay = false;
                     break;
 
@@ -75,7 +79,7 @@ class Village : Location
             }
 
             if(nextDay){
-                    Menu.StartDay(player);
+                    Game.NextDay(player);
                 }
         }
         }

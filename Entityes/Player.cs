@@ -8,7 +8,7 @@ class Player : Entity
     
     public Inventory Inventory { get; private set; }
     public Equipment Equipment { get; } = new Equipment();
-    public int money {get; private set;}= 1000;
+    public int money {get; private set;}= 200;
     public int hunger{get; private set;} = 100;
     public int statDayAlive {get; private set;}= 0;
     public int statDayWork{get; private set;} = 0;
@@ -99,7 +99,7 @@ public static Player CreateNew()
 
         data.Health = 100;
         data.Hunger = 100;
-        data.money = 1000;
+        data.money = 200;
         data.level = 1;
         data.exp = 0;
         data.statDayAlive = 0;

@@ -34,7 +34,7 @@ class Forest : Location
             Console.WriteLine("4 - Охотиться");
             Console.WriteLine("5 - Разбить лагерь");
             Console.WriteLine("6 - Проверить инвентарь или снаряжение");
-            Console.WriteLine("0 - Вернуться домой(займет день)");
+            Console.WriteLine("0 - Вернуться");
             Menu.Bet();
 
             switch (Console.ReadKey(true).Key)
@@ -73,7 +73,7 @@ class Forest : Location
             }
 
             if(nextDay){
-                    Menu.StartDay(player);
+                    Game.NextDay(player);
                 }
         }
         }

@@ -31,7 +31,7 @@ class ItemFabric
                 return new Wood();
             case "Камень":
                 return new Stone();
-            case "Деревянный меч":
+            case "Деревяный меч":
                 return new WoodenSword();
             case "Каменный меч":
                 return new StoneSword();

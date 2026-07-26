@@ -28,6 +28,7 @@ class Home : Location
             Console.WriteLine("1 - Спать");
             Console.WriteLine("2 - Верстак");
             Console.WriteLine("3 - Проверить инвентарь или снаряжение");
+            Console.WriteLine("4 - Сохранение");
             Console.WriteLine("0 - Путешествовать");
             Menu.Bet();
 
@@ -46,6 +47,10 @@ class Home : Location
                     player.Inventory.GameUseChoice(player);
                     nextDay = false;
                     break;
+                case ConsoleKey.D4:
+                    Menu.SaveChoice(player);
+                    nextDay = false;
+                    break;
 
                 case ConsoleKey.D0:
                     exit = true;
@@ -58,7 +63,7 @@ class Home : Location
             }
 
             if(nextDay){
-                    Menu.StartDay(player);
+                    Game.NextDay(player);
                 }
         }
         }       

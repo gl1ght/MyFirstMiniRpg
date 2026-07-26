@@ -4,8 +4,13 @@ using System.Collections.Generic;
 
 class Game
 {
+    public static int CurrentDay { get; private set; } = 1;
     
-    
+    public static void NextDay(Player player)
+    {
+        CurrentDay++;
+        Menu.StartDay(player);
+    }
 
     public static void StartGame(){
 
@@ -58,7 +63,7 @@ class Game
                         break;                                 
                 }
                 if(nextDay){
-                    Menu.StartDay(player);
+                    NextDay(player);
                 }
             }
             else 
