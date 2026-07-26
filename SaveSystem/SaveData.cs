@@ -14,6 +14,14 @@ class SaveData
         public int statDayEat { get; set; } = 0;
 
         public List<SaveInventoryData> slots { get; set; } = new List<SaveInventoryData>();
+
+        public string Weapon{ get; set; }
+        public string Helmet{ get; set; }
+        public string Chest{ get; set; }
+        public string Legs{ get; set; }
+        public string Boots{ get; set; }
+        public string Shield{ get; set; }
+        public string Backpack{ get; set; }
 }
 
 class SaveInventoryData

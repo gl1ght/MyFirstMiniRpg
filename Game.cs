@@ -18,8 +18,14 @@ class Game
         SaveData data = new SaveData();
         Player player = Menu.StartMenu(data);
         player.UpdateLvlStats();
-  
-
+        // player.Inventory.AddItem(new StoneSword(), 3);
+        // player.Inventory.AddItem(new LeatherBoots(), 3);
+        // player.Inventory.AddItem(new LeatherChest(), 3);
+        // player.Inventory.AddItem(new LeatherHelmet(), 3);
+        // player.Inventory.AddItem(new LeatherLegs(), 3);
+        // player.Inventory.AddItem(new StoneSword(), 3);
+        // player.Inventory.AddItem(new SmallBackpack(), 3);
+        
 
         while(gameOnline)
         {

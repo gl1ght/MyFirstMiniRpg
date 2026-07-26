@@ -9,7 +9,7 @@ class Equipment
 
     public Boots Boots { get; private set; }
 
-    public Leg Leg { get; private set; }
+    public Legs Legs { get; private set; }
 
     public Backpack Backpack {get; private set;}
 
@@ -136,4 +136,39 @@ class Equipment
 
         Backpack = null;
     }
+
+    public void LoadWeapon(Weapon weapon)
+    {
+        Weapon = weapon;
+    }
+
+    public void LoadHelmet(Helmet helmet)
+    {
+        Helmet = helmet;
+    }
+
+    public void LoadChest(ChestArmor armor)
+    {
+        Chest = armor;
+    }
+
+    public void LoadLegs(Legs armor)
+    {
+        Legs = armor;
+    }
+
+    public void LoadBoots(Boots boots)
+    {
+        Boots = boots;
+    }
+
+    public void LoadBackpack(Backpack backpack)
+    {
+        Backpack = backpack;
+    }
+
+    //   public void LoadShield(Shield shield)
+    // {
+    //     Shield = shield;
+    // }
 }

@@ -85,6 +85,7 @@ class Inventory
 
    public void Show()
     {
+        SortByName();
         Console.WriteLine("===== Инвентарь =====");
 
         if (slots.Count == 0)
@@ -129,8 +130,6 @@ class Inventory
     switch(Console.ReadKey(true).Key)
     {
     case ConsoleKey.D1:
-          Console.WriteLine(slot.Item.GetType().Name);
-            Console.WriteLine(slot.Item is IEquipable);
         if(slot.Item is IEquipable)
         {
           
@@ -346,7 +345,7 @@ public void CombatUseItem(LootableItems item, Player player)
 
     foreach (InventorySlot slot in slots)
     {
-        result.Add(new SaveInventoryData(slot.Item.GetType().Name, slot.Count));
+        result.Add(new SaveInventoryData(slot.Item.Name, slot.Count));
     }
 
     return result;
@@ -388,9 +387,14 @@ public void InventoryOverload(Player player)
             System.Console.WriteLine("Выбросите какой нибудь предмет");
             player.Inventory.UseChoice(player);
             check = player.Inventory.CheckInventoryOverload();
+            if (!check)
+            {
+                System.Console.WriteLine("Перегрузка снята!");
+                Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
+            }
         }
-        System.Console.WriteLine("Перегрузка снята!");
-        Console.WriteLine($"{maxTotalWeight}kg/{TotalWeight}kg");
+        
+       
     }
 
 public void EquipItem(InventorySlot slot, Player player)
@@ -402,7 +406,14 @@ public void EquipItem(InventorySlot slot, Player player)
         Console.WriteLine("Этот предмет нельзя экипировать.");
     }
 }
-}
-    
 
+public void SortByName()
+{
+    slots = slots
+        .OrderBy(s => s.Item.Name)
+        .ToList();
+}
+
+
+}
 

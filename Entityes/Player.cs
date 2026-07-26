@@ -39,8 +39,8 @@ public int ProtectionLevel
         if (Equipment.Chest != null)
             protection += Equipment.Chest.ArmorProtection;
 
-        if (Equipment.Leg != null)
-            protection += Equipment.Leg.ArmorProtection;
+        if (Equipment.Legs != null)
+            protection += Equipment.Legs.ArmorProtection;
 
         if (Equipment.Boots != null)
             protection += Equipment.Boots.ArmorProtection;

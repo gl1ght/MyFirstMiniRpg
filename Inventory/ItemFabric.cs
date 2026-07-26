@@ -33,7 +33,19 @@ class ItemFabric
                 return new Stone();
             case "Деревянный меч":
                 return new WoodenSword();
-            
+            case "Каменный меч":
+                return new StoneSword();
+            case "Кожаный шлем":
+                return new LeatherHelmet();
+            case "Кожаные поножи":
+                return new LeatherLegs();
+            case "Кожаные сапоги":
+                return new LeatherBoots();
+            case "Кожаный нагрудник":
+                return new LeatherChest();
+            case "Маленький рюкзак":
+                return new SmallBackpack();
+
 
             default:
                 System.Console.WriteLine("Ошибка:Предмет не найден");

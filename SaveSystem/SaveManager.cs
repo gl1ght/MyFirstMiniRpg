@@ -46,15 +46,16 @@ class SaveManager
         saveData.statDayWork = player.statDayWork;
         saveData.statDayEat = player.statDayEat;
 
-        foreach (var slot in player.Inventory.GetSlots())
-        {
-            if (slot != null)
-            {
-                SaveInventoryData inventoryData = new SaveInventoryData(slot.Item.Name, slot.Count);
-                saveData.slots.Add(inventoryData);
-            }
-        }
+        saveData.slots = player.Inventory.GetSlotsForSave();
         
+        saveData.Weapon = player.Equipment.Weapon?.Name;
+        saveData.Helmet = player.Equipment.Helmet?.Name;
+        saveData.Chest = player.Equipment.Chest?.Name;
+        saveData.Legs = player.Equipment.Legs?.Name;
+        saveData.Boots = player.Equipment.Boots?.Name;
+        saveData.Backpack = player.Equipment.Backpack?.Name;
+        // saveData.Shield = player.Equipment.Shield?.Name;
+
         JsonSerializerOptions options = new JsonSerializerOptions
         {
             WriteIndented = true
@@ -104,6 +105,14 @@ class SaveManager
         saveData.statDayEat = player.statDayEat;
 
         saveData.slots = player.Inventory.GetSlotsForSave();
+        Console.WriteLine(player.Equipment.Weapon.Name);
+        saveData.Weapon = player.Equipment.Weapon?.Name;
+        saveData.Helmet = player.Equipment.Helmet?.Name;
+        saveData.Chest = player.Equipment.Chest?.Name;
+        saveData.Legs = player.Equipment.Legs?.Name;
+        saveData.Boots = player.Equipment.Boots?.Name;
+        saveData.Backpack = player.Equipment.Backpack?.Name;
+        // saveData.Shield = player.Equipment.Shield?.Name;
         
         JsonSerializerOptions options = new JsonSerializerOptions
         {
@@ -142,9 +151,49 @@ class SaveManager
         }
 
         string jsonLoader = File.ReadAllText(path);
-        SaveData save = JsonSerializer.Deserialize<SaveData>(jsonLoader);
-        Player player = new Player(save);
-        player.Inventory.LoadFromSave(save.slots);
+        SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonLoader);
+        Player player = new Player(saveData);
+        player.Inventory.LoadFromSave(saveData.slots);
+        if (saveData.Weapon != null)
+        {
+            player.Equipment.LoadWeapon(
+                (Weapon)ItemFabric.Create(saveData.Weapon));
+        }
+
+        if (saveData.Helmet != null)
+        {
+            player.Equipment.LoadHelmet(
+                (Helmet)ItemFabric.Create(saveData.Helmet));
+        }
+
+        if (saveData.Chest != null)
+        {
+            player.Equipment.LoadChest(
+                (ChestArmor)ItemFabric.Create(saveData.Chest));
+        }
+
+        if (saveData.Legs != null)
+        {
+            player.Equipment.LoadLegs(
+                (Legs)ItemFabric.Create(saveData.Legs));
+        }
+
+        if (saveData.Boots != null)
+        {
+            player.Equipment.LoadBoots(
+                (Boots)ItemFabric.Create(saveData.Boots));
+        }
+
+        if (saveData.Backpack != null)
+        {
+            player.Equipment.LoadBackpack(
+                (Backpack)ItemFabric.Create(saveData.Backpack));
+        }
+        // if (saveData.Shield != null)
+        // {
+        //     player.Equipment.LoadShield(
+        //         (Shield)ItemFabric.Create(saveData.Shield));
+        // }
         Console.WriteLine("Загрузка успешна!");
         return player;
             
