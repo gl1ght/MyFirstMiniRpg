@@ -4,6 +4,7 @@ using System.Net.ServerSentEvents;
 abstract class LootableItems
 {
     public virtual bool CanUseInCombat => false;
+    public ItemCategory Category { get; protected set; }
      public string Name { get; protected set; }
       public bool CanStack { get; protected set; }
     public string Description { get; protected set; }
@@ -61,4 +62,15 @@ public enum EquipmentSlot
 interface IEquipable
 {
     EquipmentSlot Slot { get; }
+}
+
+public enum ItemCategory
+{
+    Food,
+    Material,
+    Weapon,
+    Armor,
+    Tool,
+    Potion,
+    Accessory
 }

@@ -9,6 +9,7 @@ abstract class Weapon : EquipmentItem, IEquipable
     {
         //стак, Имя, описание, базовая цена, вес,урон уровень прочность
         DamageBuff = damageBuff;
+        Category = ItemCategory.Weapon;
     }
 
 }

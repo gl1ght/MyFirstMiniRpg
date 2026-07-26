@@ -4,10 +4,15 @@ class Menu
     public static void ShowMenu(Player player)
         {
             Bet();
-            System.Console.WriteLine("Инструкция:\n1 - искать еду\n2 - идти на работу\n3 - разбить лагерь и отдохнуть\n4 - проверить инвентарь или экипировку\n5 - статистика\nesc - выйти в меню");
-            System.Console.WriteLine($"Уровень:{player.level}\nПрогресс до след уровня {player.Exp}/{player.level*100}\nЗдоровье:{player.Health}\nЕда:{player.Hunger}\nДеньги:{player.money}\nБазовый урон:{player.Damage}");
+            System.Console.WriteLine("Инструкция:\n1 - путешествие\n2 - домой\n3 - проверить инвентарь или экипировку\nesc - выйти в меню");
+            MainPlayerStats(player);
             Bet();
         }
+
+    public static void MainPlayerStats(Player player)
+    {
+        System.Console.WriteLine($"Уровень:{player.level}\nПрогресс до след уровня {player.Exp}/{player.level*100}\nЗдоровье:{player.Health}\nЕда:{player.Hunger}\nДеньги:{player.money}\nБазовый урон:{player.Damage}");
+    }
 
     public static bool GameLeave()
     {
@@ -27,6 +32,7 @@ class Menu
 
      public static void StartDay(Player player)
     {
+        System.Console.WriteLine("Наступил новый день");
         player.NewDay();
         
     }
@@ -129,6 +135,7 @@ class Menu
         }
         return null;
     }
+
 
 }
 

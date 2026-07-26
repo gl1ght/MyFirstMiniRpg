@@ -14,19 +14,12 @@ class Game
         Console.ReadKey(true);
         bool nextDay = true;
         bool gameOnline = true;
+        LocationManager locationManager = new LocationManager();
         Random dice = new Random();
         SaveData data = new SaveData();
         Player player = Menu.StartMenu(data);
         player.UpdateLvlStats();
-        player.Inventory.AddItem(new StoneSword(), 3);
-        player.Inventory.AddItem(new LeatherBoots(), 3);
-        player.Inventory.AddItem(new LeatherChest(), 3);
-        player.Inventory.AddItem(new LeatherHelmet(), 3);
-        player.Inventory.AddItem(new LeatherLegs(), 3);
-        player.Inventory.AddItem(new StoneSword(), 3);
-        player.Inventory.AddItem(new SmallBackpack(), 3);
         
-
         while(gameOnline)
         {
             player.AliveCheckByHN();
@@ -40,26 +33,19 @@ class Game
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
-                        player.SearchFood(dice, player);
+                        LocationManager.Show(locationManager, player);
+                        nextDay = false;
                         break;
                         
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
-                        player.GoForWork(dice);
+                        locationManager.GoHome(player);
+                        nextDay = false;
                         break;
                         
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
-                        player.GoToSleep(dice);
-                        break;
-                    case ConsoleKey.D4:
-                    case ConsoleKey.NumPad4:
                         player.Inventory.GameUseChoice(player);
-                        nextDay = false;
-                        break;
-                    case ConsoleKey.D5:
-                    case ConsoleKey.NumPad5:
-                        Menu.StatsCheck(player);
                         nextDay = false;
                         break;
                     case ConsoleKey.Escape:

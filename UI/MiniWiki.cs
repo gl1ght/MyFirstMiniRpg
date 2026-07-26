@@ -8,6 +8,7 @@ class MiniWiki
     {
     while (true)
     {
+        System.Console.WriteLine("Внимание! Минивики не содержит всех предметов и вещей! Они будут добавлены позже");
         Console.WriteLine("Выберите категорию для просмотра:");
         Console.WriteLine("0. Выход");
         Console.WriteLine("1. Существа");

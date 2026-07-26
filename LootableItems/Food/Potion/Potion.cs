@@ -7,6 +7,7 @@ abstract class Potion : Food
     {
         //Имя, описание, базовая цена, вес, насыщение, лечение
         this.duration = duration;
+        Category = ItemCategory.Potion;
     }
     public abstract void Reduce(Player player);
 

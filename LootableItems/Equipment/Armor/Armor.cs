@@ -13,6 +13,7 @@ abstract class Armor : EquipmentItem
         : base(canStack, name, description, standartPrice, weight, requiredLevel, durability)
     {
         ArmorProtection = armorProtection;
+        Category = ItemCategory.Armor;
     }
     //стак, Имя, описание, базовая цена, вес,урон уровень прочность
 }
