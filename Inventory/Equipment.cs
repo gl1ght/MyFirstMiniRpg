@@ -3,11 +3,15 @@ class Equipment
 {
     public Weapon Weapon { get; private set; }
 
-    // public Helmet Helmet { get; private set; }
+    public Helmet Helmet { get; private set; }
 
-    // public ChestArmor Chest { get; private set; }
+    public ChestArmor Chest { get; private set; }
 
-    // public Boots Boots { get; private set; }
+    public Boots Boots { get; private set; }
+
+    public Leg Leg { get; private set; }
+
+    public Backpack Backpack {get; private set;}
 
     public bool Equip(InventorySlot slot, Player player)
     {
@@ -21,20 +25,20 @@ class Equipment
                 EquipWeapon((Weapon)slot.Item, player);
                 break;
 
-            // case EquipmentSlot.Helmet:
+            case EquipmentSlot.Head:
 
-            //     EquipHelmet((Helmet)slot.Item, player);
-            //     break;
+                EquipHelmet((Helmet)slot.Item, player);
+                break;
 
-            // case EquipmentSlot.Chest:
+            case EquipmentSlot.Chest:
 
-            //     EquipChest((ChestArmor)slot.Item, player);
-            //     break;
+                EquipChest((ChestArmor)slot.Item, player);
+                break;
 
-            // case EquipmentSlot.Boots:
+            case EquipmentSlot.Feet:
 
-            //     EquipBoots((Boots)slot.Item, player);
-            //     break;
+                EquipBoots((Boots)slot.Item, player);
+                break;
         }
 
         player.Inventory.RemoveItem(slot, 1);
@@ -51,31 +55,39 @@ class Equipment
         Weapon = weapon;
     }
 
-    // private void EquipHelmet(Helmet helmet, Player player)
-    // {
-    //     if (Helmet != null)
-    //         player.Inventory.AddItem(Helmet, 1);
+    private void EquipHelmet(Helmet helmet, Player player)
+    {
+        if (Helmet != null)
+            player.Inventory.AddItem(Helmet, 1);
 
-    //     Helmet = helmet;
-    // }
+        Helmet = helmet;
+    }
 
-    // private void EquipChest(ChestArmor armor, Player player)
-    // {
-    //     if (Chest != null)
-    //         player.Inventory.AddItem(Chest, 1);
+    private void EquipChest(ChestArmor armor, Player player)
+    {
+        if (Chest != null)
+            player.Inventory.AddItem(Chest, 1);
 
-    //     Chest = armor;
-    // }
+        Chest = armor;
+    }
 
-    // private void EquipBoots(Boots boots, Player player)
-    // {
-    //     if (Boots != null)
-    //         player.Inventory.AddItem(Boots, 1);
+    private void EquipBoots(Boots boots, Player player)
+    {
+        if (Boots != null)
+            player.Inventory.AddItem(Boots, 1);
 
-    //     Boots = boots;
-    // }
+        Boots = boots;
+    }
 
-    public void UnequipWeapon(Player player)
+    private void EquipBackpack(Backpack backpack, Player player)
+    {
+        if (Backpack != null)
+            player.Inventory.AddItem(Backpack, 1);
+
+        Backpack = backpack;
+    }
+
+    public void UnequipWeapon2(Player player)
     {
         if (Weapon == null)
             return;
@@ -85,33 +97,43 @@ class Equipment
         Weapon = null;
     }
 
-    // public void UnequipHelmet(Player player)
-    // {
-    //     if (Helmet == null)
-    //         return;
+    public void UnequipHelmet(Player player)
+    {
+        if (Helmet == null)
+            return;
 
-    //     player.Inventory.AddItem(Helmet, 1);
+        player.Inventory.AddItem(Helmet, 1);
 
-    //     Helmet = null;
-    // }
+        Helmet = null;
+    }
 
-    // public void UnequipChest(Player player)
-    // {
-    //     if (Chest == null)
-    //         return;
+    public void UnequipChest(Player player)
+    {
+        if (Chest == null)
+            return;
 
-    //     player.Inventory.AddItem(Chest, 1);
+        player.Inventory.AddItem(Chest, 1);
 
-    //     Chest = null;
-    // }
+        Chest = null;
+    }
 
-    // public void UnequipBoots(Player player)
-    // {
-    //     if (Boots == null)
-    //         return;
+    public void UnequipBoots(Player player)
+    {
+        if (Boots == null)
+            return;
 
-    //     player.Inventory.AddItem(Boots, 1);
+        player.Inventory.AddItem(Boots, 1);
 
-    //     Boots = null;
-    // }
+        Boots = null;
+    }
+
+    private void UnequipBackpack(Player player)
+    {
+        if (Backpack == null)
+            return;
+
+        player.Inventory.AddItem(Backpack, 1);
+
+        Backpack = null;
+    }
 }

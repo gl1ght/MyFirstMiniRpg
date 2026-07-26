@@ -45,14 +45,17 @@ public virtual void ShowInfoItem(LootableItems item)
         void Use(Player player);
     }
 
-enum EquipmentSlot
+public enum EquipmentSlot
 {
     Head,
-    Body,
+    Chest,
     Legs,
+    Feet,
     Weapon,
     Shield,
-    Accessory
+    Ring,
+    Necklace,
+    Backpack
 }
 
 interface IEquipable

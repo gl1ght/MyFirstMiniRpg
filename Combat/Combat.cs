@@ -3,12 +3,18 @@ class Combat
 {
     private static int Attack(Random dice, Entity entity)
     {
+
         int a = entity.Damage;
         int b = entity.Damage/2;
         int attack = dice.Next(b,a);
         System.Console.WriteLine($"-{attack}hp!");
         return attack;
     }
+
+
+
+
+
     public static void Fight(Player player, Enemy enemy)
     {
         Random dice = new Random();
@@ -104,7 +110,7 @@ class Combat
             System.Console.WriteLine($"Ход {enemy.name} {enemy.level}-го уровня");
             System.Console.WriteLine($"{enemy.name} {enemy.level}-го уровня атакует");
             int attackE = Attack(dice, enemy);
-            player.TakeDamage(attackE);
+            player.PlayerReceiveAttack(attackE, player);
             System.Console.WriteLine($"Твое здоровье: {player.Health}\nЗдоровье врага: {enemy.Health}");
             Menu.Bet();
             player.AliveCheckByHP();

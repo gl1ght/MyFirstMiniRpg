@@ -18,7 +18,7 @@ class Game
         SaveData data = new SaveData();
         Player player = Menu.StartMenu(data);
         player.UpdateLvlStats();
-        player.Inventory.AddItem(new WoodenSword(), 10);
+  
 
 
         while(gameOnline)

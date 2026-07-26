@@ -26,6 +26,32 @@ class Player : Entity
                 hunger = value;
                 }}
 
+
+public int ProtectionLevel
+{
+    get
+    {
+        int protection = 0;
+
+        if (Equipment.Helmet != null)
+            protection += Equipment.Helmet.ArmorProtection;
+
+        if (Equipment.Chest != null)
+            protection += Equipment.Chest.ArmorProtection;
+
+        if (Equipment.Leg != null)
+            protection += Equipment.Leg.ArmorProtection;
+
+        if (Equipment.Boots != null)
+            protection += Equipment.Boots.ArmorProtection;
+
+        return protection;
+    }
+}
+
+
+
+
     public override int Damage
     {
         get
@@ -203,6 +229,7 @@ public void AliveCheckByHN()
     {
         if(Hunger <= 0)
         {
+            System.Console.WriteLine("Твой голод опустился ниже 0");
             this.isAlive = false;
         }
     }
@@ -256,5 +283,12 @@ public void Damg(int damg)
         Damage += damg;
     }
 
+
+public void PlayerReceiveAttack(int damage, Player player)
+{
+    int finalDamage = Math.Max(1, damage - player.ProtectionLevel);
+
+    player.TakeDamage(finalDamage);
+}
 }
 
