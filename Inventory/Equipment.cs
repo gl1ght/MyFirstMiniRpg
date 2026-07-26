@@ -87,11 +87,12 @@ class Equipment
         Backpack = backpack;
     }
 
-    public void UnequipWeapon2(Player player)
+    public void UnequipWeapon(Player player)
     {
-        if (Weapon == null)
+        if (Weapon == null){
+            System.Console.WriteLine("У вас в руках нету оружия");
             return;
-
+        }
         player.Inventory.AddItem(Weapon, 1);
 
         Weapon = null;
@@ -100,7 +101,10 @@ class Equipment
     public void UnequipHelmet(Player player)
     {
         if (Helmet == null)
+           {
+            System.Console.WriteLine("На вас не одет шлем");
             return;
+           }
 
         player.Inventory.AddItem(Helmet, 1);
 
@@ -110,7 +114,10 @@ class Equipment
     public void UnequipChest(Player player)
     {
         if (Chest == null)
-            return;
+            {
+                System.Console.WriteLine("На вас не одет нагрудник");
+                return;
+            }
 
         player.Inventory.AddItem(Chest, 1);
 
@@ -120,7 +127,11 @@ class Equipment
     public void UnequipBoots(Player player)
     {
         if (Boots == null)
+        {
+            System.Console.WriteLine("На вас не одеты сапоги");
             return;
+        }
+
 
         player.Inventory.AddItem(Boots, 1);
 
@@ -129,13 +140,25 @@ class Equipment
 
     private void UnequipBackpack(Player player)
     {
-        if (Backpack == null)
+        if (Backpack == null){
+            System.Console.WriteLine("На вас не одет рюкзак");
             return;
-
+        }
         player.Inventory.AddItem(Backpack, 1);
 
         Backpack = null;
     }
+
+    private void UnequipLegs(Player player)
+        {
+            if (Legs == null)
+            {
+                System.Console.WriteLine("На вас не одеты поножи");
+                return;
+            }
+            player.Inventory.AddItem(Legs, 1);
+            Legs = null;
+        }
 
     public void LoadWeapon(Weapon weapon)
     {
@@ -171,4 +194,69 @@ class Equipment
     // {
     //     Shield = shield;
     // }
+
+
+public void ShowEquipment()
+{
+    Console.WriteLine("===== Экипировка =====");
+
+    Console.WriteLine($"1.Оружие: {Weapon?.Name ?? "Нет"}");
+    // Console.WriteLine($"Щит: {Shield?.Name ?? "Нет"}");
+    Console.WriteLine($"2.Шлем: {Helmet?.Name ?? "Нет"}");
+    Console.WriteLine($"3.Нагрудник: {Chest?.Name ?? "Нет"}");
+    Console.WriteLine($"4.Поножи: {Legs?.Name ?? "Нет"}");
+    Console.WriteLine($"5.Ботинки: {Boots?.Name ?? "Нет"}");
+    Console.WriteLine($"6.Рюкзак: {Backpack?.Name ?? "Нет"}");
+
+}
+
+public void InteractEquipment(Player player)
+    {
+        while(true)
+        {
+        ShowEquipment();
+        Menu.Bet();
+        System.Console.WriteLine("1 - Снять какое-то снаряжение");
+        System.Console.WriteLine("0 - Назад");
+         switch(Console.ReadKey(true).Key)
+        {
+            case ConsoleKey.D1:
+                EquipmentRemoveChoise(player);
+                break;
+            case ConsoleKey.D0:
+                return;
+            default:
+                System.Console.WriteLine("Выберите что то из меню");
+                break;
+        }
+        }
+        
+    }
+
+public void EquipmentRemoveChoise(Player player)
+    {
+        System.Console.WriteLine("Введите номер снаряжения которое хотите снять");
+         switch(Console.ReadKey(true).Key)
+        {
+            case ConsoleKey.D1:
+                UnequipWeapon(player);
+                break;
+            case ConsoleKey.D2:
+                UnequipHelmet(player);
+                break;
+            case ConsoleKey.D3:
+                UnequipChest(player);
+                break;
+            case ConsoleKey.D4:
+                UnequipLegs(player);
+                break;
+            case ConsoleKey.D5:
+                UnequipBoots(player);
+                break;
+            case ConsoleKey.D6:
+                UnequipBackpack(player);
+                break;
+        }
+    }
+
 }

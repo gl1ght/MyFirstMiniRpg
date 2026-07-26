@@ -10,83 +10,79 @@
   "statDayEat": 0,
   "slots": [
     {
-      "ItemName": "StoneSword",
+      "ItemName": "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u043C\u0435\u0447",
       "Count": 1
     },
     {
-      "ItemName": "StoneSword",
+      "ItemName": "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u043C\u0435\u0447",
       "Count": 1
     },
     {
-      "ItemName": "StoneSword",
+      "ItemName": "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u043C\u0435\u0447",
       "Count": 1
     },
     {
-      "ItemName": "StoneSword",
+      "ItemName": "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u043C\u0435\u0447",
       "Count": 1
     },
     {
-      "ItemName": "StoneSword",
+      "ItemName": "\u041A\u0430\u043C\u0435\u043D\u043D\u044B\u0439 \u043C\u0435\u0447",
       "Count": 1
     },
     {
-      "ItemName": "LeatherLegs",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0435 \u043F\u043E\u043D\u043E\u0436\u0438",
       "Count": 1
     },
     {
-      "ItemName": "LeatherLegs",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0435 \u043F\u043E\u043D\u043E\u0436\u0438",
       "Count": 1
     },
     {
-      "ItemName": "LeatherLegs",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0435 \u043F\u043E\u043D\u043E\u0436\u0438",
       "Count": 1
     },
     {
-      "ItemName": "LeatherBoots",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0435 \u0441\u0430\u043F\u043E\u0433\u0438",
       "Count": 1
     },
     {
-      "ItemName": "LeatherBoots",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0435 \u0441\u0430\u043F\u043E\u0433\u0438",
       "Count": 1
     },
     {
-      "ItemName": "LeatherBoots",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0439 \u043D\u0430\u0433\u0440\u0443\u0434\u043D\u0438\u043A",
       "Count": 1
     },
     {
-      "ItemName": "LeatherChest",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0439 \u043D\u0430\u0433\u0440\u0443\u0434\u043D\u0438\u043A",
       "Count": 1
     },
     {
-      "ItemName": "LeatherChest",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0439 \u043D\u0430\u0433\u0440\u0443\u0434\u043D\u0438\u043A",
       "Count": 1
     },
     {
-      "ItemName": "LeatherChest",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0439 \u0448\u043B\u0435\u043C",
       "Count": 1
     },
     {
-      "ItemName": "LeatherHelmet",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0439 \u0448\u043B\u0435\u043C",
       "Count": 1
     },
     {
-      "ItemName": "LeatherHelmet",
+      "ItemName": "\u041A\u043E\u0436\u0430\u043D\u044B\u0439 \u0448\u043B\u0435\u043C",
       "Count": 1
     },
     {
-      "ItemName": "LeatherHelmet",
+      "ItemName": "\u041C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0440\u044E\u043A\u0437\u0430\u043A",
       "Count": 1
     },
     {
-      "ItemName": "SmallBackpack",
+      "ItemName": "\u041C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0440\u044E\u043A\u0437\u0430\u043A",
       "Count": 1
     },
     {
-      "ItemName": "SmallBackpack",
-      "Count": 1
-    },
-    {
-      "ItemName": "SmallBackpack",
+      "ItemName": "\u041C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0440\u044E\u043A\u0437\u0430\u043A",
       "Count": 1
     }
   ],
@@ -94,7 +90,7 @@
   "Helmet": null,
   "Chest": null,
   "Legs": null,
-  "Boots": null,
+  "Boots": "\u041A\u043E\u0436\u0430\u043D\u044B\u0435 \u0441\u0430\u043F\u043E\u0433\u0438",
   "Shield": null,
   "Backpack": null
 }

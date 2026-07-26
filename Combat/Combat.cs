@@ -88,8 +88,8 @@ class Combat
                     if (!escape)
                     {
                         System.Console.WriteLine("Вам не удалось сбежать!");
-                        int attackE = Attack(dice, enemy);
                         System.Console.WriteLine($"Штрафной урон от врага!");
+                        int attackE = Attack(dice, enemy);
                         player.TakeDamage(attackE);
                         
                         endTurn = true;

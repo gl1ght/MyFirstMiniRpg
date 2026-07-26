@@ -121,6 +121,7 @@ class Inventory
         Console.WriteLine("Такого предмета нет.");
         return true;
     }
+    Menu.Bet();
     Console.WriteLine(slot.Item.Name);
 
     Console.WriteLine("1 - Использовать");
@@ -181,11 +182,23 @@ class Inventory
 
     public void GameUseChoice(Player player)
     {
-        bool inventoryactive = true;
-        while (inventoryactive)
+        System.Console.WriteLine("Что хотите проверить?");
+        System.Console.WriteLine("1 - Инвентарь");
+        System.Console.WriteLine("2 - Экипировку");
+        switch(Console.ReadKey(true).Key)
         {
-            inventoryactive = UseChoice(player);
+            case ConsoleKey.D1:
+                bool inventoryactive = true;
+                while (inventoryactive)
+                {
+                    inventoryactive = UseChoice(player);
+                }
+                break;
+            case ConsoleKey.D2:
+                player.Equipment.InteractEquipment(player);
+                break;
         }
+        
     }
 
     public InventorySlot GetSlot(int index)
@@ -413,6 +426,7 @@ public void SortByName()
         .OrderBy(s => s.Item.Name)
         .ToList();
 }
+
 
 
 }
