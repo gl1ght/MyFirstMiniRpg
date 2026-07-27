@@ -57,15 +57,16 @@ class Village : Location
                     break;
 
                 case ConsoleKey.D4:
-  
+                    nextDay = false;
                     break;
 
                 case ConsoleKey.D5:
-
+                    nextDay = false;
 
                     break;
                 case ConsoleKey.D6:
                     player.Inventory.GameUseChoice(player);
+                    nextDay = false;
                     break;
 
                 case ConsoleKey.D0:

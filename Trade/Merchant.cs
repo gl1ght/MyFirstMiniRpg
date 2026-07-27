@@ -22,7 +22,7 @@ public void CheckRefresh()
 
         GenerateMaterials();
         GenerateFood();
-
+        GeneratePotions();
 
 
             GenerateArmor();
@@ -35,7 +35,7 @@ public void CheckRefresh()
     public void ShowShop()
     {
         System.Console.WriteLine("======Лавка торговца======");
-        System.Console.WriteLine($"Баланс торговца:{TradeMoney}");
+        System.Console.WriteLine($"Баланс торговца:{TradeMoney} шекелей");
         System.Console.WriteLine("Доступные предметы:");
         for (int i = 0; i < Items.Count; i++)
         {
@@ -89,6 +89,21 @@ private void GenerateMaterials()
         random.Next(3, 8)));
 }
 
+private void GeneratePotions()
+    {
+    if(random.Next(100) < 40)
+        {    
+        Items.Add(new ShopItem(
+        ItemFabric.Create("Зелье исцеления"),
+        random.Next(1, 4)));
+        }
+    if(random.Next(100) < 40)
+    {    
+    Items.Add(new ShopItem(
+        ItemFabric.Create("Зелье насыщения"),
+        random.Next(1, 4)));
+    }
+    }
 
 private void GenerateWeapons()
 {

@@ -4,7 +4,7 @@ class LocationManager
     public Forest Forest { get; } = new();
     public Village Village { get; } = new();
     public Home Home{ get; } = new();
-    // public Dungeon Dungeon { get; } = new();
+    public Dungeon Dungeon { get; } = new();
 
     public Location CurrentLocation { get; private set; }
 
@@ -28,10 +28,10 @@ class LocationManager
         Home.ShowMenu(player);
     }
 
-    // public void GoToDungeon()
-    // {
-    //     CurrentLocation = Dungeon;
-    // }
+    public void GoToDungeon()
+    {
+        CurrentLocation = Dungeon;
+    }
 
 
 public static void Show(LocationManager manager, Player player)
@@ -56,9 +56,10 @@ public static void Show(LocationManager manager, Player player)
                 manager.Village.ShowMenu(player);
                 break;
 
-            // case ConsoleKey.D3:
-            //     manager.ChangeLocation(new Dungeon());
-            //     break;
+            case ConsoleKey.D3:
+                manager.GoToDungeon();
+                manager.Dungeon.ShowMenu(player);
+                break;
         }
     }
 
