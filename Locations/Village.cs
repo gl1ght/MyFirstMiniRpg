@@ -40,7 +40,7 @@ class Village : Location
             {
                 case ConsoleKey.D1:
                     merchant.CheckRefresh();
-                    merchant.ShowShop();
+                    merchant.ShopInteract(player);
                     nextDay = false;
                     break;
 
