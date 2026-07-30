@@ -7,7 +7,9 @@ abstract class Location
 
 
     public abstract void Enter(Player player);
+
     public abstract void ShowMenu(Player player);
+    
     public Location (string name, string description)
     {
         Name = name;

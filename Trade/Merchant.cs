@@ -170,6 +170,7 @@ public void ShopInteract(Player player)
         while (true)  
         {
         ShowShop();
+        System.Console.WriteLine($"Ваш баланс: {player.money} шекелей");
         System.Console.WriteLine("Что желаете сделать?");
         System.Console.WriteLine("0 - вернуться");
         System.Console.WriteLine("1 - купить");
@@ -290,8 +291,8 @@ private void SellItem(Player player)
                     return;
                 }
             System.Console.WriteLine("По итогу этой сделки вы:");
-            System.Console.WriteLine($"Отдаете:{itemToSell.Item.Name} x {choice}");
-            System.Console.WriteLine($"Получаете{finalPrice} шекелей");
+            System.Console.WriteLine($"Отдаете: {itemToSell.Item.Name} x {choice}");
+            System.Console.WriteLine($"Получаете: {finalPrice} шекелей");
             System.Console.WriteLine("Подтверждаете сделку?");
             confirmation = Confirmation();
             if(confirmation == true)
@@ -372,7 +373,7 @@ class ShopItem
     public LootableItems Item { get; set; }
 
     public int PriceToBuy => Item.StandartPrice;
-    public double SellCommision => Item.StandartPrice * 0.1;
+    public double SellCommision => Item.StandartPrice * 0.2;
     public int PriceToSell => Item.StandartPrice - (int)SellCommision;
 
     public int Count { get; set; }

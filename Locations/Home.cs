@@ -42,7 +42,6 @@ class Home : Location
                     System.Console.WriteLine("У тебя дома вообще то нету верстака");
                     nextDay = false;
                     break;
-
                 case ConsoleKey.D3:
                     player.Inventory.GameUseChoice(player);
                     nextDay = false;
@@ -51,7 +50,6 @@ class Home : Location
                     Menu.SaveChoice(player);
                     nextDay = false;
                     break;
-
                 case ConsoleKey.D0:
                     exit = true;
                     nextDay = false;

@@ -57,10 +57,12 @@ class Village : Location
                     break;
 
                 case ConsoleKey.D4:
+                    Pub(player);
                     nextDay = false;
                     break;
 
                 case ConsoleKey.D5:
+                    System.Console.WriteLine("Фермеру не нужны рабочие");
                     nextDay = false;
 
                     break;
@@ -83,6 +85,53 @@ class Village : Location
                     Game.NextDay(player);
                 }
         }
+        }
+    }
+
+    private void Pub(Player player)
+    {
+        System.Console.WriteLine("Ты входе тебя встречает трактирщик");
+        System.Console.WriteLine("Вы хотите снять комнату? - спрашивает он");
+        bool confirm = Confirmation();
+        if (confirm)
+        {
+            System.Console.WriteLine("Стоимость аренды 50 шеклекй/ночь");
+            System.Console.WriteLine("Будете арендовывать?");
+            confirm = Confirmation();
+            if (confirm)
+            {
+                if (player.money < 50)
+                {
+                    Console.WriteLine("У вас недостаточно денег.");
+                    return;
+                }
+                System.Console.WriteLine("Вы арендовали комнату");
+                player.Mony(-50);
+                player.GoToSleep(dice);
+                player.Heal(50);
+            }
+            else if (!confirm)
+            {
+                System.Console.WriteLine("Вы решили не арендовывать комнату");
+                return;
+            }
+        }
+        else if (!confirm)
+        {
+            return;
+        }
+    }
+
+    public bool Confirmation()
+    {
+        while (true)
+        {
+        System.Console.WriteLine("1 - Да");
+        System.Console.WriteLine("2 - Нет");
+        ConsoleKey choiceStr = Console.ReadKey(true).Key;
+        if(choiceStr == ConsoleKey.D1){return true;}
+        else if(choiceStr == ConsoleKey.D2){return false;}
+        else{System.Console.WriteLine("Принимаються только 1 или 2");}
         }
     }
 }

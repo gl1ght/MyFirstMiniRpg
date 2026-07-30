@@ -209,7 +209,7 @@ class Inventory
     return slots[index];
     }
  
- public bool CombatInventoryShow()
+public bool CombatInventoryShow()
     {
         this.combatSlots.Clear();
 

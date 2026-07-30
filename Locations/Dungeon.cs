@@ -11,6 +11,7 @@ class Dungeon : Location
     List<ConsoleKey> QTEKey = new List<ConsoleKey>{ConsoleKey.W, ConsoleKey.S, ConsoleKey.A, ConsoleKey.D};
     public Dungeon() : base("Подземелье", "Темное и сырое подземелье. Содержит множество опасноестей, однако награда оправдывает риск")
     {
+        
     }
 
     public override void Enter(Player player)
@@ -165,11 +166,11 @@ class Dungeon : Location
     private bool QTE()
     {
         
-         Thread.Sleep(dice.Next(500, 1001));
+         Thread.Sleep(dice.Next(4000, 6001));
         ConsoleKey keyToPress = GetKey(dice.Next(QTEKey.Count));
         System.Console.WriteLine($"ЖМИ {keyToPress}");
         sw.Restart();
-        while (sw.ElapsedMilliseconds < 700)
+        while (sw.ElapsedMilliseconds < 800)
         {
             if (Console.KeyAvailable)
             {

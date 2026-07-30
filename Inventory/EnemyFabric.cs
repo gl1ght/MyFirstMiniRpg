@@ -10,10 +10,8 @@ class EnemyFabric
                 return null;
             case "Волк":
                 return new Wolf();
-
             case "Медведь":
                 return new Bear();
-
             case "Бандит":
                 return new Bandit();
             case "Слизень":
